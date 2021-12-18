@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/charoleizer/my-collection/src/core"
+)
 
 func main() {
-	fmt.Println("Hello, 世界")
+	fmt.Println(core.HelloSekai())
 }

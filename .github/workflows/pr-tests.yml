@@ -1,7 +1,7 @@
 name: Go
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
@@ -22,12 +22,7 @@ jobs:
         export PATH=$PATH:$HOME/gopath/bin
 
     - name: Ginkgo Test
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
-        go test -v ./... -coverprofile="c.out"
-        ./cc-test-reporter after-build -t gocov -p $(go list -m)
-      
-      env:
-        CC_TEST_REPORTER_ID: ca2c58a85fab8ac43b248334cbd311aec9b4cca3d00c2e9057a334e9e5d39bcb
+      run: ginkgo -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --compilers=2
+
+    - name: Build
+      run: go build -v ./...

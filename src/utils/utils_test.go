@@ -7,7 +7,7 @@ import (
 )
 
 var _ = Describe("Utils", func() {
-	It("Should return empty string", func() {
-		Expect(utils.RemoveSpecialCharacters("any text")).To(Equal(""))
+	It("Should return 'Empty text' where there is no arguments", func() {
+		Expect(utils.RemoveSpecialCharacters("")).To(Equal("Empty text"))
 	})
 })

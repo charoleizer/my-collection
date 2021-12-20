@@ -29,5 +29,12 @@ jobs:
 #       run: go build -v ./...
 
     - name: Ginkgo Test
-      run: ginkgo -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --compilers=2
-
+      run: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+        ./cc-test-reporter before-build
+        ginkgo -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --compilers=2
+        ./cc-test-reporter after-build --exit-code $?
+      
+      env:
+        CC_TEST_REPORTER_ID: ca2c58a85fab8ac43b248334cbd311aec9b4cca3d00c2e9057a334e9e5d39bcb

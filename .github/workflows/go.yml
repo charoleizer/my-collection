@@ -34,7 +34,7 @@ jobs:
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
         go test ./... -coverprofile c.out
-        ./cc-test-reporter after-build --coverage-input-type gocov --exit-code $?
+        ./cc-test-reporter after-build -t gocov -p $(go list -m)
       
       env:
         CC_TEST_REPORTER_ID: ca2c58a85fab8ac43b248334cbd311aec9b4cca3d00c2e9057a334e9e5d39bcb

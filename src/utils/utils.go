@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"log"
 	"regexp"
 )
 
@@ -10,12 +9,8 @@ func RemoveSpecialCharacters(text string) string {
 		return "Empty text"
 	}
 
-	re, err := regexp.Compile(`[^\w]`)
-	if err != nil {
-		log.Fatal(err)
-		return "Invalid text"
-	}
-	text = re.ReplaceAllString(text, " ")
+	//Expression here is fixed. There is no reason to check err
+	re, _ := regexp.Compile(`[^\w\s]`)
+	text = re.ReplaceAllString(text, "")
 	return text
-
 }

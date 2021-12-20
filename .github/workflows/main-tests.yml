@@ -18,6 +18,8 @@ jobs:
 
     - name: Install dependencies
       run: |
+        go get -v github.com/onsi/ginkgo/ginkgo
+        go get -v github.com/onsi/gomega
         go get -v -t ./...
         export PATH=$PATH:$HOME/gopath/bin
 

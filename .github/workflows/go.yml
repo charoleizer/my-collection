@@ -1,0 +1,33 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+
+    - name: Install dependencies
+      run: |
+        go get -v github.com/onsi/ginkgo/ginkgo
+        go get -v github.com/onsi/gomega
+        go get -v -t ./...
+        export PATH=$PATH:$HOME/gopath/bin
+
+#     - name: Build
+#       run: go build -v ./...
+
+    - name: Ginkgo Test
+      run: ginkgo -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --compilers=2
+

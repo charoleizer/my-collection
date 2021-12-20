@@ -9,8 +9,7 @@ func RemoveSpecialCharacters(text string) string {
 		return "Empty text"
 	}
 
-	//Expression here is fixed. There is no reason to check err
-	re, _ := regexp.Compile(`[^\w\s]`)
+	re := regexp.MustCompile(`[^\w\s]`)
 	text = re.ReplaceAllString(text, "")
 	return text
 }

@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: |
         go test -v -coverpkg ./src/... ./tests/... -coverprofile="c.out"
-        go tool cover -func .\c.out
+        go tool cover -func c.out
 
     - name: Build
       run: go build -v ./...

@@ -27,7 +27,7 @@ jobs:
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
         go test -v -coverpkg ./src/... ./tests/... -coverprofile="c.out"
-        go tool cover -func .\c.out
+        go tool cover -func c.out
         ./cc-test-reporter after-build -t gocov -p $(go list -m)
       
       env:

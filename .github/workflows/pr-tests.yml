@@ -22,7 +22,7 @@ jobs:
         export PATH=$PATH:$HOME/gopath/bin
 
     - name: Test
-      run: go test -v ./... -coverprofile="c.out"
+      run: go test -v -coverpkg ./src/... ./tests/... -coverprofile="c.out"
 
     - name: Build
       run: go build -v ./...

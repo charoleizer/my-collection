@@ -26,7 +26,7 @@ jobs:
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
-        go test -v ./... -coverprofile="c.out"
+        go test -v -coverpkg ./src/... ./tests/... -coverprofile="c.out"
         ./cc-test-reporter after-build -t gocov -p $(go list -m)
       
       env:

@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/charoleizer/my-collection/src/core"
+	"github.com/charoleizer/my-collection/src/routes"
 )
 
 func main() {
-	fmt.Println(core.HelloSekai())
+	routes.RunServer()
 }

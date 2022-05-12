@@ -1,28 +1,28 @@
-package core_test
+package domain_test
 
 import (
 	"fmt"
 	"runtime"
 	"time"
 
-	"github.com/charoleizer/my-collection/src/core"
+	"github.com/charoleizer/my-collection/src/domain"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gmeasure"
 )
 
-var _ = Describe("Core", func() {
+var _ = Describe("Domain", func() {
 
 	Context("When HelloSekai return a string", func() {
 
 		It("Should return 'Hello, 世界'", func() {
-			Expect(core.HelloSekai()).To(Equal("Hello, 世界"))
+			Expect(domain.HelloSekai()).To(Equal("Hello, 世界"))
 		})
 
 		It("Should perform in less than 500ms", func() {
 			experiment := gmeasure.NewExperiment("HelloSekai Performance")
 			experiment.SampleDuration("HelloSekai", func(_ int) {
-				core.HelloSekai()
+				domain.HelloSekai()
 			}, gmeasure.SamplingConfig{N: 1})
 			Expect(experiment.GetStats("HelloSekai").DurationFor(gmeasure.StatMedian)).Should(BeNumerically("<", 500*time.Millisecond))
 
@@ -34,7 +34,7 @@ var _ = Describe("Core", func() {
 			experiment.RecordNote("HelloSekai Properties")
 			experiment.Sample(func(idx int) {
 				stopwatch := experiment.NewStopwatch()
-				core.HelloSekai()
+				domain.HelloSekai()
 				stopwatch.Record("HelloSekai Runtime", gmeasure.Style(""), gmeasure.Precision(time.Millisecond))
 
 				var m runtime.MemStats

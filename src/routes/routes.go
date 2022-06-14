@@ -1,19 +1,16 @@
 package routes
 
 import (
+	"net/http"
+
 	"github.com/charoleizer/my-collection/src/domain"
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo"
 )
 
 func RunServer() {
-	r := gin.Default()
-
-	r.GET("/hello_sekai", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": domain.HelloSekai(),
-		})
-
+	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, domain.HelloSekai())
 	})
-
-	r.Run()
+	e.Logger.Fatal(e.Start(":1323"))
 }

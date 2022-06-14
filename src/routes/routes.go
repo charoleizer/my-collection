@@ -7,10 +7,8 @@ import (
 	"github.com/labstack/echo"
 )
 
-func RunServer() {
-	e := echo.New()
+func MapRoutes(e *echo.Echo) {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, domain.HelloSekai())
 	})
-	e.Logger.Fatal(e.Start(":1323"))
 }

@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/charoleizer/my-collection/src/routes"
-)
+import "github.com/charoleizer/my-collection/src/server"
 
 func main() {
-	routes.RunServer()
+	server.RunServer()
 }

@@ -7,6 +7,5 @@ import (
 
 func MapRoutes(e *echo.Echo) {
 	e.GET("/hello", controllers.Hello)
-	e.GET("/home", controllers.Home)
 
 }

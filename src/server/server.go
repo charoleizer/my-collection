@@ -8,6 +8,11 @@ import (
 
 func RunServer() {
 	e := echo.New()
+	e.Static("/", "src/views/public/")
+	e.File("/favicon.ico", "src/views/public/favicon.ico")
+	e.File("/", "src/views/public/index.html")
+
+	// e.Use(middleware.Logger())
 
 	views.RenderTemplate(e)
 	routes.MapRoutes(e)

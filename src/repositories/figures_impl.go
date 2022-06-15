@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/charoleizer/my-collection/src/models"
-	"github.com/charoleizer/my-collection/src/utils"
+	"github.com/charoleizer/my-collection/src/storage"
 )
 
 type Figures struct {
@@ -12,7 +12,7 @@ type Figures struct {
 }
 
 func (f *Figures) Save() error {
-	client, err := utils.Connect()
+	client, err := storage.Connect()
 	if err != nil {
 		return err
 	}

@@ -8,4 +8,7 @@ import (
 func MapRoutes(e *echo.Echo) {
 	e.GET("/hello", controllers.Hello)
 
+	// TODO - Change to POST
+	e.GET("/figures", controllers.Figures)
+
 }

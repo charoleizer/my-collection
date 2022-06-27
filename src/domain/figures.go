@@ -4,7 +4,7 @@ import (
 	"github.com/charoleizer/my-collection/src/models"
 )
 
-func HelloFigures() *models.Figures {
-	return &models.Figures{ID: "1", Name: "Luffy"}
-
+// Checks if the figure's name is Luffy
+func IsLuffy(figure models.Figures) bool {
+	return figure.Name == "Luffy"
 }

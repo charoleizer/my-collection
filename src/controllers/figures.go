@@ -4,27 +4,40 @@ import (
 	"net/http"
 
 	"github.com/charoleizer/my-collection/src/domain"
+	"github.com/charoleizer/my-collection/src/models"
 	"github.com/charoleizer/my-collection/src/repositories"
 	"github.com/labstack/echo"
 )
 
-func Save(f repositories.IFigures) error {
-	err := f.Save()
-	if err != nil {
-		return err
-	}
-	return nil
+var f *repositories.Figures
+
+func init() {
+	f = &repositories.Figures{}
 }
 
-func Figures(c echo.Context) error {
-	figure := &repositories.Figures{}
-	figure.Figures = domain.HelloFigures()
+func Save(ctx echo.Context) error {
 
-	err := Save(figure)
-	if err != nil {
-		return c.String(http.StatusOK, err.Error())
+	// Loads the figure from the argument
+	if ctx.Request().Method == "GET" {
+		f.Figures = &models.Figures{}
+		f.Figures.ID = "1"
+		f.Figures.Name = "Luffy"
 	}
 
-	return c.String(http.StatusOK, "Done")
+	if ctx.Request().Method == "POST" {
+		return ctx.String(http.StatusNotImplemented, "POST Method is comming soon")
+	}
 
+	// Checks if the figure is Luffy
+	if !domain.IsLuffy(*f.Figures) {
+		return ctx.String(http.StatusPreconditionFailed, "the figure is not Luffy")
+	}
+
+	// Saves the figure
+	err := f.Save()
+	if err != nil {
+		return ctx.String(http.StatusExpectationFailed, err.Error())
+	}
+
+	return ctx.String(http.StatusOK, "Done")
 }

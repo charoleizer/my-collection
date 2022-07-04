@@ -1,19 +1,28 @@
 package utils_test
 
 import (
+	"testing"
+
 	"github.com/charoleizer/my-collection/src/utils"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Utils", func() {
+func TestHello(t *testing.T) {
+	assert := func(t *testing.T, result, expected interface{}) {
+		t.Helper()
+		if result != expected {
+			t.Errorf("result '%v', expected '%v'", result, expected)
+		}
+	}
 
-	It("Should return 'Empty text' when there is no arguments", func() {
-		Expect(utils.RemoveSpecialCharacters("")).To(Equal("Empty text"))
+	t.Run("Should return 'Empty text' when there is no arguments'", func(t *testing.T) {
+		result := utils.RemoveSpecialCharacters("")
+		expected := "Empty text"
+		assert(t, result, expected)
 	})
 
-	It("Should return 'Expected text' when argument is '[-!,Expected*)@#%( text&$_?.^' ", func() {
-		Expect(utils.RemoveSpecialCharacters("[-!,Expected*)@#%( text&$?.^")).To(Equal("Expected text"))
+	t.Run("Should return 'Expected text' when argument is '[-!,Expected*)@#%( text&$_?.^' ", func(t *testing.T) {
+		result := utils.RemoveSpecialCharacters("[-!,Expected*)@#%( text&$?.^")
+		expected := "Expected text"
+		assert(t, result, expected)
 	})
-
-})
+}
